@@ -1,23 +1,88 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mineora Admin Panel</title>
-    <style>
-        body { font-family: sans-serif; background: #1e293b; color: white; padding: 20px; }
-        .box { background: #334155; padding: 20px; border-radius: 10px; }
-        input, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
-        button { background: #0ea5e9; color: white; font-weight: bold; }
-    </style>
+    <title>Mineora - User Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Supabase CDN -->
+    <script src="https://jsdelivr.net"></script>
 </head>
 <body>
-    <h2>👑 Mineora Admin Panel</h2>
-    <div class="box">
-        <h3>🎯 Add New Task</h3>
-        <input type="text" id="tName" placeholder="Task Name">
-        <input type="text" id="tLink" placeholder="Task Link">
-        <button onclick="alert('Task Added!')">Add Task</button>
-    </div>
+
+    <!-- টপ বার -->
+    <header>
+        <div class="brand">
+            <img src="logo.png" alt="Mineora" class="app-logo">
+            <h2>Mineora</h2>
+        </div>
+        <div class="balance-display">
+            <span id="userMnoBalance">0.00 MNO</span>
+        </div>
+    </header>
+
+    <!-- বটম নেভিগেশন মেনু -->
+    <nav class="navigation-bar">
+        <button onclick="changeTab('home')">🏠 Home</button>
+        <button onclick="changeTab('tasks')">🎯 Tasks</button>
+        <button onclick="changeTab('referral')">👥 Refer</button>
+        <button onclick="changeTab('withdraw')">💸 Withdraw</button>
+    </nav>
+
+    <!-- মূল কন্টেন্ট এরিয়া -->
+    <main class="container">
+        
+        <!-- ১. হোম ও মাইনিং ট্যাব -->
+        <section id="homeTab" class="page-tab active">
+            <div class="dashboard-card">
+                <h3>Mining Machine</h3>
+                <div class="info-row"><span>Token Value:</span> <strong>1 MNO = 0.08 USDT</strong></div>
+                <div class="info-row"><span>Mining Rate:</span> <strong>5 MNO/hour</strong></div>
+                <div class="progress-container"><div id="miningBar" style="width: 0%"></div></div>
+                <p id="timerText">Timer: 24:00:00</p>
+                <button id="miningActionBtn" onclick="triggerMining()">Start Mining</button>
+            </div>
+            <div class="dashboard-card">
+                <h3>Daily Check-in</h3>
+                <p>Streak Reward Plan (7 Days)</p>
+                <button onclick="processDailyCheckin()">Claim Reward</button>
+            </div>
+        </section>
+
+        <!-- ২. টাস্ক ট্যাব -->
+        <section id="tasksTab" class="page-tab">
+            <h3>Active Tasks</h3>
+            <div id="liveTasksContainer" class="list-container">
+                <!-- এডমিন প্যানেল থেকে তৈরি করা টাস্ক এখানে অটো লোড হবে -->
+            </div>
+        </section>
+
+        <!-- ৩. রেফারেল ট্যাব -->
+        <section id="referralTab" class="page-tab">
+            <h3>Referral Network</h3>
+            <div class="dashboard-card">
+                <p>Your Referral Code: <strong id="userRefCode">---</strong></p>
+                <p>Get <strong>20 MNO</strong> instantly + 10% commission from your friends!</p>
+                <button onclick="copyInviteLink()">Copy Invite Link</button>
+            </div>
+        </section>
+
+        <!-- ৪. উইথড্র ট্যাব -->
+        <section id="withdrawTab" class="page-tab">
+            <h3>Withdraw Funds</h3>
+            <div class="dashboard-card text-center">
+                <p>Conversion Date: <strong class="highlight">30 October</strong></p>
+                <p class="status-badge locked">Withdrawal Closed Until Conversion Date</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        window.onload = function() {
+            initializeUserPanel();
+        }
+    </script>
 </body>
 </html>

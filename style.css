@@ -1,0 +1,229 @@
+/* ==========================================
+   MINEORA PREMIUM TELEGRAM MINI APP THEME
+   ========================================== */
+
+:root {
+    --bg-color: #0b0f19;
+    --card-bg: #161c2e;
+    --accent-blue: #00d2ff;
+    --accent-gold: #ffd700;
+    --text-main: #ffffff;
+    --text-muted: #8a99ad;
+    --border-color: #232d45;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    max-width: 480px; /* টেলিগ্রাম স্ক্রিনের জন্য স্ট্যান্ডার্ড */
+    margin: 0 auto;
+    padding-bottom: 90px; /* বটম নেভিগেশনের জন্য স্পেস */
+    min-height: 100vh;
+}
+
+/* 📱 টপ বার ডিজাইন */
+header {
+    background: linear-gradient(135deg, #111726, #161c2e);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.app-logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent-blue);
+}
+
+.brand h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: linear-gradient(to right, var(--accent-blue), #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.balance-display {
+    background: rgba(0, 210, 255, 0.1);
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: var(--accent-blue);
+    font-size: 1rem;
+    box-shadow: 0 0 8px rgba(0, 210, 255, 0.1);
+}
+
+/* 📦 কন্টেইনার এবং কার্ড ডিজাইন */
+.container {
+    padding: 20px 15px;
+}
+
+.page-tab {
+    display: none;
+}
+
+.page-tab.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.dashboard-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--accent-blue);
+    border-left: 3px solid var(--accent-blue);
+    padding-left: 8px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.info-row span {
+    color: var(--text-muted);
+}
+
+.highlight {
+    color: var(--accent-gold);
+}
+
+/* ⛏️ প্রোগ্রেস বার এবং টাইমার */
+.progress-container {
+    background-color: #0b0f19;
+    height: 8px;
+    border-radius: 4px;
+    margin: 15px 0;
+    overflow: hidden;
+}
+
+#miningBar {
+    height: 100%;
+    background: linear-gradient(to right, var(--accent-blue), #0081ff);
+    box-shadow: 0 0 8px var(--accent-blue);
+    transition: width 0.5s ease;
+}
+
+#timerText {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* 🔘 প্রিমিয়াম বাটন স্টাইল */
+button {
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent-blue), #0072ff);
+    color: #000;
+    color: var(--text-main);
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 210, 255, 0.2);
+}
+
+button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 5px rgba(0, 210, 255, 0.1);
+}
+
+/* ⚓ বটম নেভিগেশন বার (মোবাইল অ্যাপের মতো স্থির থাকবে) */
+.navigation-bar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    background-color: #111625;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+.navigation-bar button {
+    background: none;
+    border: none;
+    box-shadow: none;
+    width: auto;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    gap: 4px;
+}
+
+.navigation-bar button:active {
+    transform: none;
+}
+
+.navigation-bar button.active, .navigation-bar button:focus {
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+/* ⚠️ স্ট্যাটাস ব্যাজ */
+.status-badge.locked {
+    background-color: rgba(255, 75, 75, 0.1);
+    border: 1px solid rgba(255, 75, 75, 0.3);
+    color: #ff4b4b;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

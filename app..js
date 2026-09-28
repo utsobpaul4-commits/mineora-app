@@ -1,8 +1,8 @@
 // ========================================================
 // ১. SUPABASE কানেকশন (এখানে আপনার সঠিক প্রজেক্ট ক্রেডেনশিয়াল বসাবেন)
 // ========================================================
-const AM_SUPABASE_URL = "https://supabase.co"; 
-const AM_SUPABASE_KEY = "your-anon-public-key";             
+const AM_SUPABASE_URL = "https://jbpkurvrleupiedafmox.supabase.co"; 
+const AM_SUPABASE_KEY = "sb_publishable_8iPNBiyICc4WvDX-CxtbcQ_0fEyWQ7R";             
 const baseClient = typeof supabase !== 'undefined' ? supabase.createClient(AM_SUPABASE_URL, AM_SUPABASE_KEY) : null;
 
 // ========================================================

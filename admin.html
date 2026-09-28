@@ -1,23 +1,81 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mineora Admin Panel</title>
-    <style>
-        body { font-family: sans-serif; background: #1e293b; color: white; padding: 20px; }
-        .box { background: #334155; padding: 20px; border-radius: 10px; }
-        input, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
-        button { background: #0ea5e9; color: white; font-weight: bold; }
-    </style>
+    <title>Mineora - Secure Admin Control</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Supabase CDN -->
+    <script src="https://jsdelivr.net"></script>
 </head>
-<body>
-    <h2>👑 Mineora Admin Panel</h2>
-    <div class="box">
-        <h3>🎯 Add New Task</h3>
-        <input type="text" id="tName" placeholder="Task Name">
-        <input type="text" id="tLink" placeholder="Task Link">
-        <button onclick="alert('Task Added!')">Add Task</button>
+<body class="admin-layout">
+
+    <!-- 🔒 গেটওয়ে লগইন স্ক্রিন -->
+    <div id="loginAuthGateway" class="auth-wrapper">
+        <div class="auth-card">
+            <h2>Mineora Secure Access</h2>
+            <p>Authorized Admin Terminal Only</p>
+            <input type="text" id="inputAdminUser" placeholder="Admin Telegram ID (Username)">
+            <input type="password" id="inputAdminPass" placeholder="Secure System Password">
+            <button onclick="executeAdminAuth()">Verify & Connect</button>
+        </div>
     </div>
+
+    <!-- 📊 মূল এডমিন প্যানেল ইন্টারফেস (লগইন সফল হলে এটি আনলক হবে) -->
+    <div id="mainAdminConsole" style="display: none;">
+        <header class="admin-navbar">
+            <h2>Mineora Admin Console</h2>
+            <button onclick="performAdminLogout()" class="btn-danger">🔒 Terminal Logout</button>
+        </header>
+
+        <main class="admin-main">
+            <!-- স্ট্যাটস ওভারভিউ -->
+            <section class="stats-grid">
+                <div class="stat-box"><h4>Total Users</h4><p id="totalUsersCount">0</p></div>
+                <div class="stat-box"><h4>MNO Distributed</h4><p id="totalMnoDistributed">0</p></div>
+                <div class="stat-box"><h4>Pending Payouts</h4><p id="pendingWithdrawCount">0</p></div>
+            </section>
+
+            <!-- অ্যাপ কন্ট্রোল সেকশন -->
+            <div class="management-grid">
+                <!-- টাস্ক ম্যানেজার -->
+                <div class="panel-card">
+                    <h3>Deploy New Task</h3>
+                    <input type="text" id="admTaskTitle" placeholder="Task Name">
+                    <input type="text" id="admTaskDesc" placeholder="Description">
+                    <select id="admTaskType">
+                        <option value="Video">🎥 Video</option>
+                        <option value="Website">🌐 Website</option>
+                        <option value="Social">📣 Social</option>
+                        <option value="App">📱 App</option>
+                    </select>
+                    <input type="text" id="admTaskLink" placeholder="Destination URL">
+                    <input type="number" id="admTaskReward" placeholder="Reward Value (MNO)">
+                    <button onclick="submitNewTaskToDb()">Publish to App</button>
+                </div>
+
+                <!-- মাইনিং কনফিগারেশন -->
+                <div class="panel-card">
+                    <h3>Mining Settings</h3>
+                    <div class="input-inline">
+                        <label>Rate (MNO/hr):</label>
+                        <input type="number" id="configMiningRate" value="5">
+                    </div>
+                    <div class="input-inline">
+                        <label>Duration (hrs):</label>
+                        <input type="number" id="configMiningDuration" value="24">
+                    </div>
+                    <button onclick="updateMiningConfig()">Save Configuration</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        window.onload = function() {
+            verifyActiveAdminSession();
+        }
+    </script>
 </body>
 </html>
